@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        .container {
+            border: 6px solid lightgray;
+            display: flex;
+            /** flex-direction: row | row-reverse | column | column-reverse **/
+            /** flex-wrap: nowrap | wrap | wrap-reverse **/
+            /* flex-flow: row wrap-reverse; */
+            /* justify-content: center; */
+            /** justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly **/
+            align-items: baseline;
+            height: 800px;
+        }
+        .flex-item {
+            color: black;
+            width: 135px;
+            font-size: 2rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        .item-1 {
+            background-color: lightblue;
+            padding: 10px;
+
+        }
+        .item-2 {
+            background-color: lightyellow;
+            padding: 50px;
+            flex-grow: 10;
+        }
+        .item-3 {
+            background-color: lightpink;
+            padding: 40px;
+            align-self: flex-end;
+            order: -1;
+        }
+        .item-4 {
+            background-color: lightgreen;
+            height: 200px;
+            align-self: center;
+        }
+        .item-5 {
+            background-color: lightsalmon;
+            padding-top: 10px;
+            align-self: stretch;
+        }
+        .item-6 {
+            background-color: skyblue;
+            padding-bottom: 20rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flex-item item-1">Item 1</div>
+        <div class="flex-item item-2">Item 2</div>
+        <div class="flex-item item-3">Item 3</div>
+        <div class="flex-item item-4">Item 4</div>
+        <div class="flex-item item-5">Item 5</div>
+        <div class="flex-item item-6">Item 6</div>
+    </div>
+</body>
+</html>
