@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Noto Sans KR", Arial, sans-serif;
+    font-size: 19px;
+    line-height: 2;
+    background-color: var(--secondary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+footer {
+    border-top: 1px solid var(--border)
+}
+footer p {
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+}
+
+footer a {
+    margin-left: 3px;
+}
+
+:root {
+    --primary: #FFFFFF;
+    --secondary: #FAFAFA;
+    --border: #DBDBDB;
+
+    --story-border: #C7C7C7;
+
+    --text-dark: #262626;
+    --text-light: #999999;
+}

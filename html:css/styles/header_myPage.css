@@ -1,0 +1,37 @@
+/* Header Style */
+header {
+    padding: 20px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+    font-style: italic;
+    line-height: 1.5;
+}
+
+header p {
+    margin-left: 45px;
+}
+
+/* Navigation Style */
+nav {
+    background-color: #fff;
+    border-bottom: 1px solid var(--border);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 12px 0;
+}
+
+nav ul li a {
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ff6b6b;
+}
