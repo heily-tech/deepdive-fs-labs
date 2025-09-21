@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>???</title>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>while을 range로 변환</h2>
+    <h5>L.range : 숫자 범위를 추상화한 제너레이터</h5>
+    <script>
+        function iter(end) {
+            let i = 0;
+            while (i < end) {
+                console.log(i);
+                ++i;
+            }
+        }
+        // iter(10);
+
+        function iter2(end) {
+            _.each(console.log, L.range(end));
+        }
+        iter2(10);
+
+        // var res = L.range(10);
+        // res.next()
+        // L.range(1, 10, 1);
+    </script>
+    <hr>
+    <h2>효과를 each로 구분</h2>
+    <h5>_.each : 이터러블을 순회하면서 효과를 실행하는 함수</h5>
+    <script>
+        function iter3(end) {
+            _.go(
+                L.range(1, end, 2),
+                _.each(console.log)
+            );
+        }
+        iter3(10);
+    </script>
+</body>
+</html>
