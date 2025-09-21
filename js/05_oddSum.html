@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이터러블 프로그래밍 라이브러리 FxJS</title>
+    <style>
+        * { font-family: Arial, Helvetica, sans-serif; }
+    </style>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>홀수 n개 더하기</h2>
+    <h5>배열 list를 순회하면서 찾은 홀수의 제곱을 limit번 더하여 반환</h5>
+    <script>
+        function oddSum(limit, list) {
+            let acc = 0;
+            for (const a of list) {
+                if (a % 2) {
+                    const b = a * a;
+                    acc += b;
+                    if (--limit == 0)
+                        break;
+                }
+            }
+            console.log(acc);
+        }
+        oddSum(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    </script>
+    <hr><hr>
+    <h2>1. if를 filter로 변환해보기</h2>
+    <h5>L.filter : lazy filter, 조건을 만족하는 값만 게으르게 걸러네는 제너레이터</h5>
+    <script>
+        function oddSum2(limit, list) {
+            let acc = 0;
+            for (const a of L.filter(a => a % 2, list)) {
+                const b = a * a;
+                acc += b;
+                if (--limit == 0)
+                    break;
+            }
+            console.log(acc);
+        }
+        oddSum2(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        // [...L.filter(a => a % 2, [1, 2, 3, 4])];
+    </script>
+    <hr><hr>
+    <h2>2. 값 변화 후, map으로 변수 할당</h2>
+    <h5>L.map : 각 원소를 주어진 함수로 변환하여 게으르게 반환</h5>
+    <script>
+        function oddSum3(limit, list) {
+            let acc = 0;
+            for (const a of L.map(a => a * a, L.filter(a => a % 2, list))) {
+                acc += a;
+                if (--limit == 0)
+                    break;
+            }
+            console.log(acc);
+        }
+        oddSum3(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    </script>
+    <hr><hr>
+    <h2>3. break를 take로 변경</h2>
+    <h5>L.take : 이터러블에서 앞의 n개 원소만 게으르게 뽑아 배열로 반환. 원하는 개수만큼 yield 되면 중단</h5>
+    <script>
+        function oddSum4(limit, list) {
+            let acc = 0;
+            for (const a of L.take(limit, L.map(a => a * a, L.filter(a => a % 2, list)))) {
+                acc += a;
+            }
+            console.log(acc);
+        }
+        oddSum4(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        // var it = L.take(2, [1, 2, 3]);
+        // it.next()
+    </script>
+    <hr><hr>
+    <h2>4. 축약 및 합산을 reduce로 변경</h2>
+    <h5>reduce : 이터러블을 왼쪽부터 하나씩 축약하여 단일 값으로 만듦</h5>
+    <h5>go : 여러 함수를 왼쪽에서 오른쪽으로 읽기 좋은 순서대로 적용 (파이프라인)</h5>
+    <script>
+        const add = (a, b) => a + b;
+        function oddSum5(limit, list) {
+            // console.log(
+            //     _.reduce(add,
+            //         L.take(limit,
+            //             L.map(a => a * a,
+            //                 L.filter(a => a %2, list)
+            //             )
+            //         )
+            //     )
+            // );
+
+            _.go(
+                list,
+                L.filter(a => a % 2),
+                L.map(a => a * a),
+                L.take(limit),
+                _.reduce(add),
+                console.log);
+        }
+        oddSum5(3, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    </script>
+</body>
+</html>
