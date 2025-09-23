@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reduce 응용</title>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>reduce + 복잡한 함수 + acc 보다는 map + 간단한 함수 + reduce</h2>
+    <script>
+        const users = [
+            {name: 'AA', age: 35},
+            {name: 'BB', age: 26},
+            {name: 'CC', age: 28},
+            {name: 'DD', age: 34},
+            {name: 'EE', age: 23},
+            ];
+
+            // 복잡한 함수
+            console.log(
+                _.reduce((total, u) => total + u.age, 0, users)
+            );
+
+            // 보다 심플하게 시작값을 추상화
+            console.log(
+                _.reduce((a, b) => a + b, L.map(u => u.age, users))
+            );
+
+            // 함수 분리
+            const add = (a, b) => a + b;
+            console.log(
+                _.reduce(add, L.map(u => u.age, users))
+            );
+    </script>
+    <hr>
+    <h2>reduce 하나보다 map + filter + reduce</h2>
+    <script>
+        // 삼항 연산자
+        // 사용하여도 괜찮으나, 가독성이나 실수 발생 확률이 높음
+        console.log(
+        _.reduce((total, u) => u.age >= 30 ? total : total + u.age, 0, users)
+        );  
+
+        // filter를 사용해서 범위 축소
+        // map을 사용해서 사용할 컬럼만 꺼내기
+        console.log(
+        _.reduce(add,
+            _.map(u => u.age,
+                _.filter(u => u.age < 30, users)))
+        );
+    </script>
+</body>
+</html>
