@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>2. entries</h2>
+    <script>
+        const obj1 = {
+            a: 1, b: 2, c: 3, d: 4
+        };
+        console.log(Object.values(obj1));
+
+        L.entries = function*(obj) {
+            for (const k in obj) {
+                yield [k, obj[k]];   
+            }
+        };
+        _.go(
+            obj1,
+            L.entries,       // [[k,v], ...]를 지연 생성
+            L.filter(([_, v]) => v % 2),  // 값이 홀수인 것만 통과
+            L.map(([k, v]) => ({[k]: v })),
+            _.reduce(Object.assign),
+            console.log
+        );
+    </script>
+    <h2>3. keys</h2>
+    <script>
+        console.log(Object.values(obj1));
+
+        L.keys = function*(obj) {
+            for (const k in obj) {
+                yield k;   
+            }
+        };
+        
+        _.go(
+            obj1,
+            L.keys,
+            _.each(console.log)
+        );
+    </script>
+</body>
+</html>

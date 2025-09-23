@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>1. values</h2>
+    <script>
+        const obj1 = {
+            a: 1, b: 2, c: 3, d: 4
+        };
+        console.log(Object.values(obj1));
+        _.go(
+            obj1,
+            Object.values,              // 배열 생성
+            _.reduce((a, b) => a + b),  // 집계
+            console.log
+        );
+
+        // Eager
+        // 큰 객체일수록 복잡도 증가
+
+        L.values = function*(obj) {
+            for (const k in obj) {
+                console.log(k);
+                yield obj[k];   // value를 하나씩 생성
+            }
+        };
+        _.go(
+            obj1,
+            L.values,           // 지연 이터레이터
+            // L.take(2),
+            _.reduce((a, b) => a + b),
+            console.log
+        );
+    </script>
+</body>
+</html>
