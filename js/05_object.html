@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>4. object</h2>
+    <script>
+        const a = [
+            ['a', 1],
+            ['b', 2],
+            ['c', 3]
+        ];
+        const b = {a: 1, b: 2, c: 3};
+
+        // 함수형 버전
+        // {} 객체를 여러번 생성
+        const object = entries => _.go(
+            entries,
+            L.map(([k, v]) => ({[k]:v })),
+            _.reduce(Object.assign)
+        );
+        console.log(object(a));
+
+        // 명령형 축약 버전
+        // obj 객체를 직접 수정하면서 반환
+        const object2 = entries =>
+        _.reduce((obj, [k, v]) =>
+            (obj[k] = v, obj), {}, entries);
+        console.log(object2(a));
+
+        console.log(object(L.entries({b: 3, c: 4})));
+
+        let m = new Map();
+        m.set('a', 10);
+        m.set('b', 20);
+        m.set('c', 30);
+        console.log(m);
+        // 서버 전달을 위해 Object로 변형
+        // Map은 기본적으로 이터러블 지원
+        // object(m)으로 바로 일반 객체로 변환 가능
+        console.log(object(m));
+    </script>
+    <h2>5. mapObject</h2>
+    <script>
+        const mapObject = _ => _;
+        console.log(mapObject(a => a + 10, {a: 1, b: 2, c: 3}));
+        // 현재 출력 : a => a + 10
+
+        // 1. [['a', 1], ['b', 2], ['c', 3]] 으로 변형하여 이터러블로 다루기
+        const mapObject2 = (f, obj) => _.go(
+            obj,
+            L.entries,
+            _.map(([k, v]) => [k, f(v)])
+        );
+        console.log(mapObject2(a => a + 10, {a: 1, b: 2, c: 3}));
+
+        // 2. object로 변형
+        const mapObject3 = (f, obj) => _.go(
+            obj,
+            L.entries,
+            _.map(([k, v]) => [k, f(v)]),
+            object
+        );
+        console.log(mapObject3(a => a + 10, {a: 1, b: 2, c: 3}));
+    </script>
+</body>
+</html>
