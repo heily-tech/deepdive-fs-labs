@@ -84,5 +84,20 @@
         );
         console.log(query4(obj1));
     </script>
+    <hr>
+    <h2>Query To Object</h2>
+    <script>
+        console.log('-----------Query To Object------------');
+        const split = _.curry((sep, str) => str.split(sep));
+        
+        const queryToObject = _.pipe(
+            split('&'),
+            _.map(split('=')),
+            _.map(([k, v]) => ({[k] : v})),
+            _.reduce(Object.assign)
+        );
+
+        console.log(queryToObject('a=1&c=CC&d=DD'));
+    </script>
 </body>
 </html>
