@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>6. pick</h2>
+    <script>
+        const obj = {
+            a: 1,
+            b: 2,
+            c: 3,
+            d: 4,
+            e: 5
+        };
+        const pick = _ => _;
+        console.log(pick(['b', 'c'], obj));
+
+        const object = entries => _.go(
+            entries,
+            L.map(([k, v]) => ({[k]:v })),
+            _.reduce(Object.assign)
+        );
+
+        const pick2 = (ks, obj) => _.go(
+            ks,
+            _.map(k => [k, obj[k]]),
+            object
+        );
+        console.log(pick2(['b', 'c'], obj));
+
+        const pick3 = (ks, obj) => _.go(
+            ks,
+            _.map(k => [k, obj[k]]),
+            _.reject(([k, v]) => v === undefined),
+            object
+        );
+        console.log(pick3(['b', 'c', 'z'], obj));
+    </script>
+</body>
+</html>
