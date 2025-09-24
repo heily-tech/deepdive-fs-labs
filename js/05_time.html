@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시간을 이터러블로 다루기</title>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>1. range와 take의 재해석</h2>
+    <script>
+        // // 3초 후 한번에 0, 1, 2가 출력
+        // _.go(
+        //     _.range(10),            // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        //     L.map(_.delay(1000)),   // 각 값 처리에 1초씩 지연
+        //     _.take(3),              // 3개를 모두 미리 실행해서 수집 (즉시)
+        //     _.each(console.log)
+        // );
+
+        // // 1초에 한번씩 0, 1, 2가 출력
+        // _.go(
+        //     L.range(10),            // 이터레이너, 하나씩 꺼냄
+        //     L.map(_.delay(1000)),   // 꺼낼 때마다 1초씩 지연
+        //     L.take(3),              // 3개만 순차적으로 평가
+        //     _.each(console.log)
+        // );
+
+        // //
+        // _.go(
+        //     L.range(1, 10),
+        //     L.map(_.delay(1000)),
+        //     L.filter(a => a % 2),
+        //     L.map(_ => new Date()),
+        //     L.take(3),
+        //     _.each(console.log)
+        // );
+    </script>
+    <hr>
+    <h2>2. takeWhile, takeUntil</h2>
+    <script>
+        console.log(`takeWhile`);
+        _.go(
+            [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0, 1],
+            _.takeWhile(a => a),
+            _.each(console.log)
+        );
+
+        console.log(`takeUntil`);
+        _.go(
+            [1, 2, 3, 4, 5, 6, 7, 8, 0, 0, 0, 1],
+            _.takeUntil(a => !a),
+            _.each(console.log)
+        );
+
+        _.go(
+            [0, false, undefined, null, 10, 20, 30],
+            _.takeUntil(a => a),
+            _.each(console.log)
+        );
+    </script>
+</body>
+</html>
