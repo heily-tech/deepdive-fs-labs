@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="fx.js"></script>
+</head>
+<body>
+    <h2>자동차 경주</h2>
+    <h5>각 조가 순서대로 출발할 수 있도록 스케줄링</h5>
+    <h5>할 일들을 이터러블(리스트)로 바라보기</h5>
+    <script>
+        const track = [
+            { cars: ['철수', '영희', '철희', '영수']},
+            { cars: ['하든', '커리', '듀란트', '팀슨']},
+            { cars: ['폴', '어빙', '릴라드', '맥컬럼']},
+            { cars: ['스파이더맨', '아이언맨']},    // 조가 완성되지 않음
+            { cars: []},                       // 조가 구성되지 않음
+        ]
+
+        // 완성된 조 출력하기
+        _.go(
+            L.range(Infinity),
+            L.map(i => track[i]),
+            L.map(({cars}) => cars),
+            L.takeWhile(({length: l}) => l == 4),
+            _.each(console.log)
+        );
+
+        // 출발 지연
+        _.go(
+            L.range(Infinity),
+            L.map(i => track[i]),
+            L.map(({cars}) => cars),
+            L.map(_.delay(1000)),
+            L.takeWhile(({length: l}) => l == 4),
+            // L.flat,
+            L.map(car => `${car} 출발!`),
+            _.each(console.log)
+        );
+    </script>
+</body>
+</html>
