@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "rootDir":"src",
+        "outDir":"build/js",
+        "target": "ES6",            // ES2015
+        "noEmitOnError": false,     // emit js file when ts file errors
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "lib": ["ESNext", "DOM"],
+        "strict": true,
+        "strictNullChecks": false
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}
