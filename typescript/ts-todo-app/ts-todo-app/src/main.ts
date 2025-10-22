@@ -1,24 +1,48 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import List from "./models/List";
+import ListItem from "./models/ListItem";
+import ListTemplate from "./templates/ListTemplate";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const initApp = (): void => {
+  console.log('init!');
+  const listInstance = List.instance;
+  const listTemplateInstance = ListTemplate.instance;
+  const itemForm = document.getElementById('form') as HTMLFormElement;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+  itemForm.addEventListener('submit', (event: SubmitEvent): void => {
+    event.preventDefault();
+
+    // 새 item Text
+    const inputEl = document.getElementById('item-input') as HTMLInputElement;
+    const newText = inputEl.value.trim();
+    if (!newText.length)  
+      return;
+    inputEl.value = "";
+
+    // 새 item ID
+    const itemId = listInstance.list.length
+      ? parseInt(listInstance.list[listInstance.list.length - 1].id) + 1
+      : 1;
+
+    // 새 item 생성
+    const newItem = new ListItem(itemId.toString(), newText);
+
+    // list에 새 item 넣기
+    listInstance.addItem(newItem);
+
+    listTemplateInstance.render(listInstance);
+  })
+
+  const clearItemsEl = document.getElementById('clear-items-btn') as HTMLButtonElement;
+  clearItemsEl.addEventListener('click', () => {
+    listInstance.clearList();
+    listTemplateInstance.clear();
+  })
+
+  // 초기 데이터 load
+  listInstance.load();
+  
+  // 생성된 데이터를 이용해서 화면에 디스플레이
+  listTemplateInstance.render(listInstance);
+}
+
+initApp();

@@ -1,3 +1,4 @@
+import storage from "../utils/storage";
 import ListItem, { IListItem } from "./ListItem";
 
 interface IList {
@@ -22,17 +23,23 @@ export default class List implements IList {
     }
 
     load(): void {
-        const storedList: string | null = localStorage.getItem('myList');
+        // const storedList: string | null = localStorage.getItem('myList');
 
-        if (typeof storedList !== 'string')
-            return;
-        const parsedList: {
+        // if (typeof storedList !== 'string')
+        //     return;
+        // const parsedList: {
+        //     _id: string,
+        //     _item: string,
+        //     _checked: boolean
+        // }[] = JSON.parse(storedList);
+
+        const parsedList = storage.get<{
             _id: string,
             _item: string,
             _checked: boolean
-        }[] = JSON.parse(storedList);
+        }[]>('myList')
 
-        parsedList.forEach(itemObj => {
+        parsedList.forEach((itemObj: { _id: string | undefined; _item: string | undefined; _checked: boolean | undefined; }) => {
             const newListItem = new ListItem(
                 itemObj._id,
                 itemObj._item,
