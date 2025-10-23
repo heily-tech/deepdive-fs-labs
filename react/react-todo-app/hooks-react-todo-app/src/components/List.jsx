@@ -24,6 +24,7 @@ export default function List({id, title, completed, todoData, setTodoData}) {
     const handleClick = (id) => {
         let newTodoData = todoData.filter((data) => data.id !== id)
         setTodoData(newTodoData);
+        localStorage.setItem('todoData', JSON.stringify(newTodoData));
     }
 
     const handleCompleteChange = (id) => {
@@ -34,6 +35,7 @@ export default function List({id, title, completed, todoData, setTodoData}) {
         })
 
         setTodoData(newTodoData);
+        localStorage.setItem('todoData', JSON.stringify(newTodoData));
     }
 
     const handleEditChange = (e) => {
@@ -50,6 +52,7 @@ export default function List({id, title, completed, todoData, setTodoData}) {
         })
 
         setTodoData(newTodoData);
+        localStorage.setItem('todoData', JSON.stringify(newTodoData));
         setIsEditing(false);
     }
 
@@ -75,6 +78,4 @@ export default function List({id, title, completed, todoData, setTodoData}) {
                 <button style={btnStyle} onClick={() => setIsEditing(true)}>Edit</button>
             </div>
     }
-
-    
 }

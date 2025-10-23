@@ -14,18 +14,9 @@ import Form from './components/Form';
 // export default App
 
 export default function App() {
-  const [todoData, setTodoData] = useState([
-    {
-      id: "1",
-      title: "Study English",
-      completed: true,
-    },
-    {
-      id: "2",
-      title: "Clean Room",
-      completed: false,
-    }
-  ]);
+  const initialTodoData = localStorage.getItem('todoData') ? JSON.parse(localStorage.getItem('todoData')) : [];
+
+  const [todoData, setTodoData] = useState(initialTodoData);
 
   const handleSubmit = (e) => {
       e.preventDefault();
@@ -36,6 +27,7 @@ export default function App() {
       completed: false
       }
       setTodoData([...todoData, newTodo]);
+      localStorage.setItem('todoData', JSON.stringify([...todoData, newTodo]));
       setValue('');
   }
   const [value, setValue] = useState('');
