@@ -2,7 +2,7 @@
   "name": "react-netflix",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://heily-tech.github.io/react-netflix",
+  "homepage": "https://heily-tech.github.io/deepdive-fs-labs",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
