@@ -24,7 +24,7 @@ function MovieModal({
                     alt="modal__poster-img" />
                 <div className="modal__content">
                     <p className="modal__details">
-                        <span className="modal__user-perc">100% for you</span>{"    "}{release_date ? release_date : first_air_date}
+                        <span className="modal__user-perc">100% for you</span>{" "}{release_date ? release_date : first_air_date}
                     </p>
                     <h2 className="modal__title">{title ? title : name}</h2>
                     <p className="modal__overview">평점 : {vote_average}</p>
