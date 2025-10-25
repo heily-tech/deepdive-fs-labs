@@ -24,6 +24,7 @@ h2 {
   align-items: center;
   justify-content: center;
   visibility: hidden;
+  font-size: 30px;
 }
 .slider__arrow-right {
   padding: 20px 0;
@@ -40,7 +41,8 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  visibility: hidden;
+  visibility: hidden;  
+  font-size: 30px;
 }
 .arrow {
   transition: 400ms all ease-in-out;
