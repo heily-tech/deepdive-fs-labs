@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/deepdive-fs-labs/static/css/main.c9e40af6.css",
-    "main.js": "/deepdive-fs-labs/static/js/main.b79f9792.js",
-    "static/js/453.47d2ff3f.chunk.js": "/deepdive-fs-labs/static/js/453.47d2ff3f.chunk.js",
-    "index.html": "/deepdive-fs-labs/index.html",
-    "main.c9e40af6.css.map": "/deepdive-fs-labs/static/css/main.c9e40af6.css.map",
-    "main.b79f9792.js.map": "/deepdive-fs-labs/static/js/main.b79f9792.js.map",
-    "453.47d2ff3f.chunk.js.map": "/deepdive-fs-labs/static/js/453.47d2ff3f.chunk.js.map"
+    "main.css": "/deepdive-fs-labs/react-netflix/static/css/main.c9e40af6.css",
+    "main.js": "/deepdive-fs-labs/react-netflix/static/js/main.1607c0b5.js",
+    "static/js/453.47d2ff3f.chunk.js": "/deepdive-fs-labs/react-netflix/static/js/453.47d2ff3f.chunk.js",
+    "index.html": "/deepdive-fs-labs/react-netflix/index.html",
+    "main.c9e40af6.css.map": "/deepdive-fs-labs/react-netflix/static/css/main.c9e40af6.css.map",
+    "main.1607c0b5.js.map": "/deepdive-fs-labs/react-netflix/static/js/main.1607c0b5.js.map",
+    "453.47d2ff3f.chunk.js.map": "/deepdive-fs-labs/react-netflix/static/js/453.47d2ff3f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c9e40af6.css",
-    "static/js/main.b79f9792.js"
+    "static/js/main.1607c0b5.js"
   ]
 }
