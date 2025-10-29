@@ -4,11 +4,14 @@ import React from 'react'
 async function getPost(postId: string) {
     const res = await fetch(
         `http://127.0.0.1:8090/api/collections/posts/records/${postId}`, 
-        {next: 
-            {revalidate: 10}
-        });
+        {next: {revalidate: 10}}
+        );
     const data = await res.json();
-
+    
+    if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error('Failed to fetch data');
+    }
     return data;
 }
 

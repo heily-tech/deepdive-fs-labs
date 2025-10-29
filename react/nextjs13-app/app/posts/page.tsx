@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from 'next/link';
 import React from 'react'
+import CreatePost from './CreatePost';
 
 
 async function getPosts() {
@@ -22,6 +23,7 @@ const PostsPage = async () => {
             {posts?.map((post) => {
                 return <PostItem key={post.id} post={post} />
             })}
+            <CreatePost />
         </div>
     )
 }
