@@ -1,0 +1,18 @@
+﻿프로젝트 키,이슈 유형,Work Item Id,상위 항목,요약,설명,레이블,우선 순위,담당자,
+SCA,Epic,E1,,할로윈 당일 쿠폰 이벤트로 매출 늘리기,"목표: 할로윈 시즌 한정 이벤트로 구매 전환율을 높이고, 재방문 고객을 확보한다.
+
+핵심 컨셉: “당일 한정 쿠폰 발급”을 통해 긴박감을 유도하고, SNS 공유 확산을 유도한다.",Epic,High,sdoaolo@gmail.com,
+SCA,Story,S1,E1,구매자 : 이벤트 페이지에서 쿠폰을 눌러서 내 지갑에 담을 수 있다.,,Story,High,,
+SCA,Task,T1,E1,프로젝트 초기 세팅,Jira협업을 위해 SpringBoot 세팅/ Github Repository / Jira 연동을 처리한다. ,BE-Setting,High,sdoaolo@gmail.com,
+SCA,Bug,B1,E1,종료된 이벤트에 URL로 직접 접속하면 쿠폰이 무제한 발급 됨 ,"문제 : 사용자가 이벤트 종료 후에도 /generate URL을 직접 입력하면 계속 쿠폰이 발급됨
+>>  이벤트 기간 검증 로직 추가",BE-Bug,Low,,
+SCA,Bug,B2,E1,버튼을 눌렀는데 두 장이 담김(중복 방지 실패),"문제: 사용자가 버튼을 빠르게 두 번 누르거나, 네트워크 지연 중 중복 요청 발생.
+>> 서버 측 중복 검사 = 쿠폰 코드 + 사용자 식별자 기준으로 중복 쿠폰 발급 방지 (existsByUserIdAndEventId())
+>> 클라이언트 단 방지 = 버튼 클릭 시 즉시 비활성화 (disabled=true)",BE-Bug,Medium,,
+SCA,Sub-task,ST1,S1,할로윈용 버튼/배너 디자인 만들기,"오렌지·보라 계열 컬러 / 호박, 유령, 박쥐 등 일러스트 사용.
+클릭 시 약간의 애니메이션 효과(버튼 흔들림, 빛남 등)",Design,Medium,sdoaolo@gmail.com,
+SCA,Sub-task,ST2,S1,버튼 동작 만들기(눌렀을 때 “내 쿠폰함에 담기”),버튼 클릭 → /generate API 호출 → 쿠폰 발급,FE-Dev,High,sdoaolo@gmail.com,
+SCA,Sub-task,ST3,S1,중복 담기 막기(한 사람당 1장만),"세션 기반 2개 제한 (비로그인 사용자용),  로그인 사용자용 DB 검토",BE-Dev,Medium,,
+SCA,Sub-task,ST4,S1,알림 문구 만들기(성공/이미 보유/매진/기간 종료),"즉각적이고 직관적인 피드백이 중요
+단순 Alert 대신 시각적 강조(색상, 아이콘, 애니메이션 등) 활용",FE-Dev,High,,
+SCA,Sub-task,ST5,S1,쿠폰 발급 현황 확인,/count API를 통해 현재까지 발급된 쿠폰 개수를 조회 (운영/통계용).,BE-Dev,High,,
