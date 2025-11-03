@@ -11,10 +11,21 @@ export default class App extends Component {
     float: "right"
   }
 
-  getStyle = () => {
+  inputStyle = {
+      flex: '10', 
+      padding: '5px', 
+      border: "none", 
+      borderRadius: "7px", 
+      width: "98.5%", 
+      height: "17px", 
+      boxShadow: "-1px 5px 18px rgb(0 0 0 / 10%)"
+  }
+
+  getStyle = (isLast) => {
     return {
-      padding: "20px",
-      borderBottom: "1px #ccc dotted",
+      padding: "10px",
+      // borderBottom: "1px #ccc dotted",
+      borderBottom: isLast ? "none" : "1px #ccc dotted",
       textDecoration: "none",
     }
   }
@@ -58,19 +69,28 @@ export default class App extends Component {
         <div className="todoBlock">
           <div className="title">
             <h1><i>To do.</i></h1>
+            <hr />
           </div>
 
-        {this.state.todoData.map((data) => (
-          <div style={this.getStyle()} key={data.id}>
-            <input type="checkbox" defaultChecked={false} />
-            {" "}{data.title}
-            <button 
-              style={this.btnStyle} 
-              onClick={() => this.handleClick(data.id)}>X</button>
-          </div>
-        ))}
-
+          {this.state.todoData.map((data, index) => (
+            <div style={this.getStyle(index === this.state.todoData.length - 1)} key={data.id}>
+              <input type="checkbox" defaultChecked={false} />
+              {" "}{data.title}
+              <button 
+                style={this.btnStyle} 
+                onClick={() => this.handleClick(data.id)}>X</button>
+            </div>
+          ))}
         </div>
+
+        <form style={{ display: 'flex', marginTop: '10px'}}>
+          <input
+            type="text"
+            name="value"
+            style={this.inputStyle}
+            placeholder='Input'
+            value="" />
+        </form>
       </div>
     )
   }
