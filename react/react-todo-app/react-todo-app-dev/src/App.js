@@ -15,7 +15,7 @@ export default class App extends Component {
       flex: '10', 
       padding: '5px', 
       border: "none", 
-      borderRadius: "7px", 
+      borderRadius: "7px 0px 0px 7px", 
       width: "98.5%", 
       height: "17px", 
       boxShadow: "-1px 5px 18px rgb(0 0 0 / 10%)"
@@ -90,6 +90,11 @@ export default class App extends Component {
             style={this.inputStyle}
             placeholder='Input'
             value="" />
+          <input
+            type="submit"
+            value="submit"
+            className="btn"
+            style={{ flex: '1', border: 'none', borderRadius: '0px 7px 7px 0px' }} />
         </form>
       </div>
     )
