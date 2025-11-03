@@ -19,42 +19,37 @@ export default class App extends Component {
     }
   }
 
-  todoData = [
-    {
-      id: "1",
-      title: "Study english",
-      completed: true
-    },
-    {
-      id: "2",
-      title: "Cleaning my desk",
-      completed: false
-    },
-    {
-      id: "3",
-      title: "Solve 1 algorithm problem",
-      completed: true
-    },
-    {
-      id: "4",
-      title: "Test Data",
-      completed: true
-    }
-
-  ]
-  /*
-  ,
-    {
-      id: "4",
-      title: "Test Data",
-      completed: true
-    }
-  */
-
+  state = {
+    todoData: [
+      {
+        id: "1",
+        title: "Study english",
+        completed: true
+      },
+      {
+        id: "2",
+        title: "Cleaning my desk",
+        completed: false
+      },
+      {
+        id: "3",
+        title: "Solve 1 algorithm problem",
+        completed: true
+      },
+      {
+        id: "4",
+        title: "Test Data",
+        completed: true
+      },
+    ],
+    value: "",
+  }
 
   handleClick = (id) => {
-    let newTodoData = this.todoData.filter((data) => data.id !== id)
-    console.log(newTodoData);
+    let newTodoData = this.state.todoData.filter((data) => data.id !== id)
+    console.log('newTodoData', newTodoData);
+
+    this.setState({ todoData: newTodoData });
   }
 
   render() {
@@ -65,7 +60,7 @@ export default class App extends Component {
             <h1><i>To do.</i></h1>
           </div>
 
-        {this.todoData.map((data) => (
+        {this.state.todoData.map((data) => (
           <div style={this.getStyle()} key={data.id}>
             <input type="checkbox" defaultChecked={false} />
             {" "}{data.title}
