@@ -43,8 +43,9 @@ export default function App() {
           <h1><i>To do.</i></h1>
           <hr />
         </div>
-      <List todoData={todoData} setTodoData={setTodoData} />
-      <Form value={value} setValue={setValue} handleSubmit={handleSubmit} />
+        <h1 className="text-3xl font-bold underline">Hello World!</h1>
+        <List todoData={todoData} setTodoData={setTodoData} />
+        <Form value={value} setValue={setValue} handleSubmit={handleSubmit} />
       </div> 
     </div>
   )
