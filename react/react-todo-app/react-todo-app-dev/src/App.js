@@ -58,9 +58,26 @@ export default class App extends Component {
 
   handleClick = (id) => {
     let newTodoData = this.state.todoData.filter((data) => data.id !== id)
-    console.log('newTodoData', newTodoData);
+    console.log('[DELETE] newTodoData', newTodoData);
 
     this.setState({ todoData: newTodoData });
+  }
+
+  handleChange = (e) => {
+    this.setState({ value : e.target.value });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+    let newTodo = {
+      id: Date.now(),
+      title: this.state.value,
+      completed: false,
+    };
+
+    this.setState({ todoData: [...this.state.todoData, newTodo] });
+    console.log('[CREATE] newTodoData', newTodo);
   }
 
   render() {
@@ -81,15 +98,16 @@ export default class App extends Component {
                 onClick={() => this.handleClick(data.id)}>X</button>
             </div>
           ))}
-        </div>
+        </div> 
 
-        <form style={{ display: 'flex', marginTop: '10px'}}>
+        <form style={{ display: 'flex', marginTop: '10px'}} onSubmit={this.handleSubmit}>
           <input
             type="text"
             name="value"
             style={this.inputStyle}
             placeholder='Input'
-            value="" />
+            value={this.state.value}
+            onChange={this.handleChange} />
           <input
             type="submit"
             value="submit"
