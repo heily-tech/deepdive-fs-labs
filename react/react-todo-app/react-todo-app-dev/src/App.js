@@ -21,12 +21,12 @@ export default class App extends Component {
       boxShadow: "-1px 5px 18px rgb(0 0 0 / 10%)"
   }
 
-  getStyle = (isLast) => {
+  getStyle = (isLast, completed) => {
     return {
       padding: "10px",
       // borderBottom: "1px #ccc dotted",
       borderBottom: isLast ? "none" : "1px #ccc dotted",
-      textDecoration: "none",
+      textDecoration: completed ? "line-through" : "none",
     }
   }
 
@@ -76,8 +76,19 @@ export default class App extends Component {
       completed: false,
     };
 
-    this.setState({ todoData: [...this.state.todoData, newTodo] });
+    this.setState({ todoData: [...this.state.todoData, newTodo], value: "" });
     console.log('[CREATE] newTodoData', newTodo);
+  }
+
+  handleCompleteChange = (id) => {
+    let newTodoData = this.state.todoData.map((data) => {
+      if (data.id === id) {
+        data.completed = !data.completed;
+      }
+      return data;
+    });
+    this.setState({ todoData: newTodoData });
+    console.log('[CHECK] newTodoData', newTodoData);
   }
 
   render() {
@@ -90,9 +101,11 @@ export default class App extends Component {
           </div>
 
           {this.state.todoData.map((data, index) => (
-            <div style={this.getStyle(index === this.state.todoData.length - 1)} key={data.id}>
-              <input type="checkbox" defaultChecked={false} />
-              {" "}{data.title}
+            <div style={this.getStyle(index === this.state.todoData.length - 1, data.completed)} key={data.id}>
+              <input 
+                type="checkbox" 
+                onChange={() => this.handleCompleteChange(data.id)}
+                defaultChecked={data.completed} />{" "}{data.title}
               <button 
                 style={this.btnStyle} 
                 onClick={() => this.handleClick(data.id)}>X</button>
