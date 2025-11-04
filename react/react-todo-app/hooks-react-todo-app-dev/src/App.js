@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import List from "./components/List";
 
 export default function App() {
   const [todoData, setTodoData] = useState([
@@ -14,18 +15,7 @@ export default function App() {
       completed: false
     }
   ]);
-
   const [value, setValue] = useState("");
-
-
-  const btnStyle = {
-    color: "#235373",
-    border: "none",
-    padding: "2px 5px",
-    borderRadius: "30%",
-    cursor: "pointer",
-    float: "right"
-  }
 
   const inputStyle = {
       flex: '10', 
@@ -35,23 +25,6 @@ export default function App() {
       width: "98.5%", 
       height: "17px", 
       boxShadow: "-1px 5px 18px rgb(0 0 0 / 10%)"
-  }
-
-  const getStyle = (isLast, completed) => {
-    return {
-      padding: "10px",
-      // borderBottom: "1px #ccc dotted",
-      borderBottom: isLast ? "none" : "1px #ccc dotted",
-      textDecoration: completed ? "line-through" : "none",
-    }
-  }
-
-
-  const handleClick = (id) => {
-    let newTodoData = todoData.filter((data) => data.id !== id)
-    console.log('[DELETE] newTodoData', newTodoData);
-
-    setTodoData(newTodoData);
   }
 
   const handleChange = (e) => {
@@ -72,17 +45,7 @@ export default function App() {
     setValue("");
     console.log('[CREATE] newTodoData', newTodo);
   }
-
-  const handleCompleteChange = (id) => {
-    let newTodoData = todoData.map((data) => {
-      if (data.id === id) {
-        data.completed = !data.completed;
-      }
-      return data;
-    });
-    setTodoData(newTodoData);
-    console.log('[CHECK] newTodoData', newTodoData);
-  }
+  
 
 return (
   <div className="container">
@@ -91,18 +54,8 @@ return (
         <h1><i>To do.</i></h1>
         <hr />
       </div>
-
-      {todoData.map((data, index) => (
-        <div style={getStyle(index === todoData.length - 1, data.completed)} key={data.id}>
-          <input 
-            type="checkbox" 
-            onChange={() => handleCompleteChange(data.id)}
-            defaultChecked={data.completed} />{" "}{data.title}
-          <button 
-            style={btnStyle} 
-            onClick={() => handleClick(data.id)}>X</button>
-        </div>
-      ))}
+    <List todoData={todoData} setTodoData={setTodoData} />
+      
     </div> 
 
     <form style={{ display: 'flex', marginTop: '10px'}} onSubmit={handleSubmit}>
