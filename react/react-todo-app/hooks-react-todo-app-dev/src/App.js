@@ -37,13 +37,12 @@ export default function App() {
   }
 
   return (
-    <div className="container">
-      <div className="todoBlock">
-        <div className="title">
+    <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
+      <div className="w-full p-7 m-4 bg-white rounded shadow lg:w-3/4">
+        <div className="flex justify-between mb-3 ">
           <h1><i>To do.</i></h1>
-          <hr />
+          {/* <h1>Delete All</h1> */}
         </div>
-        <h1 className="text-3xl font-bold underline">Hello World!</h1>
         <List todoData={todoData} setTodoData={setTodoData} />
         <Form value={value} setValue={setValue} handleSubmit={handleSubmit} />
       </div> 

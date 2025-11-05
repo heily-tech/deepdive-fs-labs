@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 function Form({ value, setValue, handleSubmit }) {
     const inputStyle = {
         flex: '10', 
@@ -17,19 +18,21 @@ function Form({ value, setValue, handleSubmit }) {
 
     return (
         <div>
-          <form style={{ display: 'flex', marginTop: '10px'}} onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className='flex pt-2'>
                 <input
                     type="text"
                     name="value"
-                    style={inputStyle}
+                    className="w-full px-3 py-2 mr-4 text-gray-500 border rounded"
+                    // style={inputStyle}
                     placeholder='Input'
                     value={value}
                     onChange={handleChange} />
                 <input
                     type="submit"
                     value="submit"
-                    className="btn"
-                    style={{ flex: '1', border: 'none', borderRadius: '0px 7px 7px 0px' }} />
+                    className="p-1 text-blue-400 border-2 border-blue-200 rounded hover:text-white hover:bg-blue-200"
+                    // style={{ flex: '1', border: 'none', borderRadius: '0px 7px 7px 0px' }} 
+                    />
             </form>
         </div>
     )
