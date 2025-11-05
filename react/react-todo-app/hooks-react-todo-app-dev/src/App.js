@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import List from "./components/List";
 import Form from "./components/Form";
+import Lists from "./components/Lists";
 
 export default function App() {
   const [todoData, setTodoData] = useState([
@@ -43,7 +43,7 @@ export default function App() {
           <h1><i>To do.</i></h1>
           {/* <h1>Delete All</h1> */}
         </div>
-        <List todoData={todoData} setTodoData={setTodoData} />
+        <Lists todoData={todoData} setTodoData={setTodoData} />
         <Form value={value} setValue={setValue} handleSubmit={handleSubmit} />
       </div> 
     </div>
