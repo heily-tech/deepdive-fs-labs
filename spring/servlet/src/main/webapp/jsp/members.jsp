@@ -1,0 +1,43 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: heil
+  Date: 11/26/25
+  Time: 17:15
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page import="hello.servlet.domain.member.Member" %>
+<%@ page import="java.util.List" %>
+<%@ page import="hello.servlet.domain.member.MemberRepository" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    MemberRepository memberRepository = MemberRepository.getInstance();
+    List<Member> memberList = memberRepository.findAll();
+%>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <a href="/index.html">메인</a>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>username</th>
+            <th>age</th>
+        </thead>
+        <tbody>
+        <%
+            for (Member member : memberList) {
+        %>
+        <tr>
+            <td><%= member.getId() %></td>
+            <td><%= member.getUsername() %></td>
+            <td><%= member.getAge() %></td>
+        </tr>
+        <%
+            }
+        %>
+        </tbody>
+    </table>
+</body>
+</html>
