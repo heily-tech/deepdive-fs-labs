@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: heil
-  Date: 11/26/25
-  Time: 17:15
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page import="hello.servlet.domain.member.Member" %>
 <%@ page import="java.util.List" %>
 <%@ page import="hello.servlet.domain.member.MemberRepository" %>
