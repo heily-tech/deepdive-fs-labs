@@ -27,9 +27,18 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+
+	// ✔ JSP 컴파일러 (버전 명시 X → Boot 4가 Tomcat 11용 버전 자동 제공)
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	// ✔ JSTL (Jakarta 패키지, Maven Central 존재하는 최신)
+	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0'
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0'
+	// ✔ Tomcat을 WAR로 배포할 경우
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat-runtime'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
