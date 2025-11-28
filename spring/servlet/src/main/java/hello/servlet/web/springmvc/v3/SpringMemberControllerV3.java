@@ -6,8 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class SpringMemberControllerV3 {
      *
      * @return String
      */
-    @RequestMapping("/new-form")
+    @GetMapping("/new-form")
     public String newForm() {
 
         return "new-form";
@@ -35,7 +34,7 @@ public class SpringMemberControllerV3 {
      * @param model
      * @return
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public String save(@RequestParam("username") String username,
                        @RequestParam("age") int age,
                        Model model) {
@@ -47,11 +46,11 @@ public class SpringMemberControllerV3 {
     }
 
     /**
-     *
+     *[]
      * @param model
      * @return
      */
-    @RequestMapping
+    @GetMapping
     public String members(Model model) {
         List<Member> members = memberRepository.findAll();
         model.addAttribute("members", members);
