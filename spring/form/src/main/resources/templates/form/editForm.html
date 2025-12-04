@@ -46,7 +46,7 @@
                 <label for="open" th:for="${#ids.prev('open')}" class="form-check-label">판매 오픈</label>
             </div>
         </div>
-
+        <br>
 
         <!-- multi checkbox -->
         <div>
@@ -58,7 +58,7 @@
                        th:text="${region.value}" class="form-check-label">서울</label>
             </div>
         </div>
-
+        <br>
 
         <!-- radio button -->
         <div>
@@ -72,6 +72,18 @@
                 </label>
             </div>
         </div>
+        <br>
+
+        <!-- SELECT -->
+        <div>
+            <div>배송 방식</div>
+            <select th:field="*{deliveryCode}" class="form-select">
+                <option value="">==배송 방식 선택==</option>
+                <option th:each="deliveryCode : ${deliveryCodes}" th:value="${deliveryCode.code}"
+                        th:text="${deliveryCode.displayName}">FAST</option>
+            </select>
+        </div>
+        <br>
 
         <div class="row">
             <div class="col">
