@@ -1,4 +1,4 @@
-package hello.typeconverter.controller;
+package hello.typeconverter.converter;
 
 import hello.typeconverter.type.IpPort;
 import lombok.extern.slf4j.Slf4j;
