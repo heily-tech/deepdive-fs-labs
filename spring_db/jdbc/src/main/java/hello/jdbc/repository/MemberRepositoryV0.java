@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 
 @Slf4j
@@ -36,18 +37,48 @@ public class MemberRepositoryV0 {
         }
     }
 
-    private void close(Connection conn, PreparedStatement statement, ResultSet resultSet) {
-        if (resultSet != null) {
+    public Member findById(String memberId) throws SQLException {
+        String sql = "select * from member where member_id = ?";
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, memberId);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                Member member = new Member();
+                member.setMemberId(rs.getString("member_id"));
+                member.setMoney(rs.getInt("money"));
+
+                return member;
+            } else {
+                throw new NoSuchElementException("member not found memberId=" + memberId);
+            }
+        } catch (SQLException e) {
+            log.error("db error", e);
+            throw e;
+        } finally {
+            close(conn, pstmt, rs);
+        }
+    }
+
+    private void close(Connection conn, PreparedStatement stmt, ResultSet rs) {
+        if (rs != null) {
             try {
-                resultSet.close();
+                rs.close();
             } catch (SQLException e) {
                 log.info("error", e);
             }
         }
 
-        if (statement != null) {
+        if (stmt != null) {
             try {
-                statement.close();
+                stmt.close();
             } catch (SQLException e) {
                 log.info("error", e);
             }
