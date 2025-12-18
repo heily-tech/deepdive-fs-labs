@@ -36,7 +36,7 @@ class MemberRepositoryV1Test {
         repository = new MemberRepositoryV1(dataSource);
     }
 
- 
+
     @Test
     void crud() throws SQLException {
         // save
