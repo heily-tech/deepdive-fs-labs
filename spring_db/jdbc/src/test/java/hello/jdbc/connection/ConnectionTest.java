@@ -1,5 +1,6 @@
 package hello.jdbc.connection;
 
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -35,5 +36,19 @@ public class ConnectionTest {
         Connection conn2 = dataSource.getConnection();
         log.info("connection={}, class={}", conn1, conn1.getClass());
         log.info("connection={}, class={}", conn2, conn2.getClass());
+    }
+
+    @Test
+    void dataSourceConnectionPool() throws InterruptedException, SQLException {
+        // 커넥션 풀링 : HikariProxyConnection(Proxy) -> JdbcConnection(Target)
+        HikariDataSource dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(URL);
+        dataSource.setUsername(USERNAME);
+        dataSource.setPassword(PASSWORD);
+        dataSource.setMaximumPoolSize(10);
+        dataSource.setPoolName("MyPool");
+
+        useDataSource(dataSource);
+        Thread.sleep(1000);
     }
 }
