@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Repository
 @RequiredArgsConstructor
 public class MyBatisItemRepository implements ItemRepository {
 
