@@ -37,7 +37,6 @@ import java.util.Optional;
  */
 
 @Slf4j
-@Repository
 public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
 
     private final NamedParameterJdbcTemplate template;
@@ -53,7 +52,7 @@ public class JdbcTemplateItemRepositoryV2 implements ItemRepository {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         template.update(sql, param, keyHolder);
 
-        Long key = keyHolder.getKey().longValue();
+        long key = keyHolder.getKey().longValue();
         item.setId(key);
 
         return item;

@@ -1,7 +1,6 @@
 package hello.itemservice.config;
 
 import hello.itemservice.repository.ItemRepository;
-import hello.itemservice.repository.jdbctemplate.JdbcTemplateItemRepositoryV2;
 import hello.itemservice.repository.jdbctemplate.JdbcTemplateItemRepositoryV3;
 import hello.itemservice.service.ItemService;
 import hello.itemservice.service.ItemServiceV1;
@@ -26,4 +25,5 @@ public class JdbcTemplateV3Config {
     public ItemRepository itemRepository() {
         return new JdbcTemplateItemRepositoryV3(dataSource);
     }
+
 }
