@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Repository
 @Transactional
 public class JpaItemRepositoryV1 implements ItemRepository {
 
