@@ -15,7 +15,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 @Transactional
 @RequiredArgsConstructor
 public class JpaItemRepositoryV2 implements ItemRepository {
