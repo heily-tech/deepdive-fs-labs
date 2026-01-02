@@ -108,5 +108,19 @@ public class BasicTxTest {
         txManager.rollback(outerTx);
     }
 
+    @Test
+    void inner_rollback() {
+        log.info("Start outer transaction");
+        TransactionStatus outerTx = txManager.getTransaction(new DefaultTransactionDefinition());
+
+        log.info("Start inner transaction");
+        TransactionStatus innerTx = txManager.getTransaction(new DefaultTransactionDefinition());
+        log.info("innerTx.isNewTransaction()={}", innerTx.isNewTransaction());
+        log.info("Inner transaction rollback");
+        txManager.rollback(innerTx);
+
+        log.info("Outer transaction commit");
+        assertThatThrownBy(() -> txManager.commit(outerTx))
+                .isInstanceOf(UnexpectedRollbackException.class);
     }
 }
