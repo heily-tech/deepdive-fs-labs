@@ -9,9 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.sql.DataSource;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
 @SpringBootTest
@@ -88,6 +91,22 @@ public class BasicTxTest {
 
         log.info("Outer transaction commit");
         txManager.commit(outerTx);
+    }
+
+    @Test
+    void outer_rollback() {
+        log.info("Start outer transaction");
+        TransactionStatus outerTx = txManager.getTransaction(new DefaultTransactionDefinition());
+
+        log.info("Start inner transaction");
+        TransactionStatus innerTx = txManager.getTransaction(new DefaultTransactionDefinition());
+        log.info("innerTx.isNewTransaction()={}", innerTx.isNewTransaction());
+        log.info("Inner transaction commit");
+        txManager.commit(innerTx);
+
+        log.info("Outer transaction rollback");
+        txManager.rollback(outerTx);
+    }
 
     }
 }
