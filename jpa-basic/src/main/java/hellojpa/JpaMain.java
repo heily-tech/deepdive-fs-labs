@@ -17,8 +17,8 @@ public class JpaMain {
 
         try {
             // 회원 등록
-//            createMember(1L, "HelloA", em);
-//            createMember(2L, "HelloB", em);
+            createMember(1L, "HelloA", em);
+            createMember(2L, "HelloB", em);
 
             // 회원 단일 조회
             findMember(1L, em);
@@ -32,7 +32,7 @@ public class JpaMain {
             findMember(1L, em);
 
             // 회원 삭제
-//            removeMember(2L, em);
+            removeMember(2L, em);
 
             // 회원 다중 조회
             findAll(em);
@@ -52,7 +52,7 @@ public class JpaMain {
                         .getResultList();
 
         for (Member_JPA member : result)
-            System.out.println("member.name = " + member.getName());
+            System.out.println("member.name = " + member.getUsername());
     }
 
     private static void removeMember(long id, EntityManager em) {
@@ -62,19 +62,19 @@ public class JpaMain {
 
     private static void modifyMember(Long id, String newName, EntityManager em) {
         Member_JPA foundMember = em.find(Member_JPA.class, id);
-        foundMember.setName(newName);
+        foundMember.setUsername(newName);
     }
 
     private static void findMember(Long id, EntityManager em) {
         Member_JPA foundMember = em.find(Member_JPA.class, id);
         System.out.println("foundMember.Id = " + foundMember.getId());
-        System.out.println("foundMember.Name = " + foundMember.getName());
+        System.out.println("foundMember.Name = " + foundMember.getUsername());
     }
 
     private static void createMember(long id, String name, EntityManager em) {
         Member_JPA member = new Member_JPA();
         member.setId(id);
-        member.setName(name);
+        member.setUsername(name);
 
         em.persist(member);
     }
