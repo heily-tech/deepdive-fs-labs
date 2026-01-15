@@ -14,7 +14,7 @@ public class MyContainerInitV2 implements ServletContainerInitializer {
     public void onStartup(Set<Class<?>> set, ServletContext servletContext) throws ServletException {
         System.out.println("MyContainerInitV2.onStartup");
         System.out.println("MyContainerInitV2 set = " + set);
-        System.out.println("servletContext = " + servletContext);
+        System.out.println("MyContainerInitV2 servletContext = " + servletContext);
 
         for (Class<?> appInitClass : set) {
             try {
