@@ -29,6 +29,7 @@ public class ImportSelectorTest {
     @Import(HelloConfig.class)
     public static class StaticConfig {
     }
+
     @Configuration
     @Import(HelloImportSelector.class)
     public static class SelectorConfig {
